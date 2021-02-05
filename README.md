@@ -31,3 +31,11 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 ```
+1. `.zpreztorc` ファイルをコピー
+```shell
+> cp .zpreztorc ~/
+```
+1. カスタムした `pure.zsh` をコピー
+```shell
+> cp .pure.zsh ~/.zprezto/modules/prompt/external/pure/
+```

@@ -49,6 +49,10 @@ sudo apt install tmux
 ```shell
 cp .tmux* ~/
 ```
+1. tpm
+```shell
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
 
 ## vim
 1. dein install

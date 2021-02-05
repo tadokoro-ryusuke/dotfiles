@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/tado56ryu/work/mitsuri-2/web/src/types'
+let g:netrw_dirhist_2='/home/tado56ryu/work/mitsuriLP/web/src/containers/layouts/DrawingExmapleTooltip'
+let g:netrw_dirhist_3='/home/tado56ryu/work/mitsuriLP/web/src/containers/layouts/Order3'
+let g:netrw_dirhist_4='/home/tado56ryu/work/mitsuriLP/web/src/containers/layouts/FileUploader'
+let g:netrw_dirhist_5='/home/tado56ryu/work/mitsuriLP/web/src/containers/layouts/DrawingExmapleTooltip'
+let g:netrw_dirhist_6='/home/tado56ryu/work/mitsuri-2/invoice/src/invoices/types'
+let g:netrw_dirhist_7='/home/tado56ryu/work/mitsuri-2/web/src/components/admin/blocks/EditProgress/factory'

@@ -45,3 +45,17 @@ cp .zpreztorc ~/
 ```shell
 sudo apt install tmux
 ```
+1. 設定ファイルのコピー
+```shell
+cp .tmux* ~/
+```
+
+## vim
+1. dein install
+```shell
+mkdir -p ~/.cache/dein
+cd ~/.cache/dein
+
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh ~/.cache/dein
+```

@@ -121,3 +121,40 @@ export PATH=$PATH:/usr/local/go/bin
 ```shell
 go get -u github.com/monochromegane/the_platinum_searcher/...
 ```
+
+## docker
+1. package
+```shell
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+```
+1. gpg キー追加
+```shell
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+```
+1. 鍵確認
+```shell
+sudo apt-key fingerprint 0EBFCD88
+```
+1. リポジトリ追加
+```shell
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable"
+```
+1. install
+```shell
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+
+## postgresql
+1. install
+```shell
+sudo apt-get install postgresql-client
+```

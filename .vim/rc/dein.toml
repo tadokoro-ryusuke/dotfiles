@@ -14,9 +14,6 @@ hook_post_update = '''
 '''
 
 [[plugins]]
-repo = 'tpope/vim-fugitive'
-
-[[plugins]]
 repo = 'w0ng/vim-hybrid'
 hook_add = '''
   set background=dark
@@ -43,4 +40,10 @@ repo = 'szw/vim-tags'
 repo = 'leafgarland/typescript-vim'
 [[plugins]]
 repo = 'maxmellon/vim-jsx-pretty'
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+[[plugins]]
+repo = 'preservim/nerdtree'
+[[plugins]]
+repo = 'jparise/vim-graphql'
 

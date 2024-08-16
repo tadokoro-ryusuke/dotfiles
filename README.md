@@ -54,6 +54,12 @@ cp .tmux* ~/
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
+1. 反映させる
+```shell
+source ~/.tmux.conf
+source ~/.tmux.session.conf
+```
+
 ## vim
 1. dein install
 ```shell
@@ -63,39 +69,47 @@ cd ~/.cache/dein
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh ./installer.sh ~/.cache/dein
 ```
+
 1. vimrc とかコピー
 ```shell
 cp .vimrc ~/
 cp -a .vim/ ~/
 ```
 
-## nodenv
+## volta
 1. install
 ```shell
-git clone https://github.com/nodenv/nodenv.git ~/.nodenv
-cd ~/.nodenv && src/configure && make -C src
+curl https://get.volta.sh | bash # voltaのインストールコマンド (https://docs.volta.sh/guide/getting-started)
+exec $SHELL -l # shellのリロード
+volta -v # バージョンが表示されていればインストール成功
+echo "export VOLTA_FEATURE_PNPM=1" >> ~/.zshrc
 ```
-1. path 通す
+
+1. node install
 ```shell
-echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.zshrc
-echo 'eval "$(nodenv init -)"' >> ~/.zshrc
+volta install node # LTS が入る
 ```
-1. plugin 入れる
+
+1. pnpm instal
 ```shell
-mkdir -p "$(nodenv root)"/plugins
-```
-1. build
-```shell
-git clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
-git clone https://github.com/nodenv/nodenv-update.git "$(nodenv root)"/plugins/nodenv-update
-git clone https://github.com/pine/nodenv-yarn-install.git "$(nodenv root)/plugins/nodenv-yarn-install"
+volta install pnpm
 ```
 
 ## pyenv
 1. install
 ```shell
-sudo apt-get install zlib1g-dev libssl-dev libsqlite3-dev libbz2-dev libncurses5-dev libgdbm-dev liblzma-dev libssl-dev tcl-dev tk-dev libreadline-dev
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+sudo apt update
+sudo apt install build-essential libffi-dev libssl-dev zlib1g-dev liblzma-dev libbz2-dev \
+  libreadline-dev libsqlite3-dev libopencv-dev tk-dev git
+
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+```
+
+1. .zprofile に追加
+```vim
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 ```
 
 ## rbenv

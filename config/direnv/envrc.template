@@ -1,0 +1,32 @@
+# .envrc テンプレート
+# プロジェクトルートに .envrc としてコピーしてカスタマイズしてください
+
+# Pythonプロジェクト
+# layout python python3.11
+
+# Node.jsプロジェクト
+# use node 20
+
+# Goプロジェクト
+# use golang 1.21
+
+# AWSプロファイル
+# use aws development
+
+# 環境変数
+# export DATABASE_URL="postgresql://user:pass@localhost/dbname"
+# export API_KEY="your-api-key"
+# export DEBUG=1
+
+# ローカルの.envファイルを読み込み
+# [[ -f .env ]] && source .env
+
+# プロジェクトのbinディレクトリをPATHに追加
+# PATH_add bin
+# PATH_add scripts
+
+# Python仮想環境を自動的に作成してアクティベート
+# if [[ ! -d .venv ]]; then
+#   python3 -m venv .venv
+# fi
+# source .venv/bin/activate

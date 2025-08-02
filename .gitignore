@@ -1,0 +1,23 @@
+# Backup directories
+.dotfiles_backup_*
+backup_*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Local configuration
+*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup

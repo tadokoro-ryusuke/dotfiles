@@ -1,0 +1,44 @@
+# SSH設定テンプレート
+# ~/.ssh/config にコピーしてカスタマイズしてください
+
+# グローバル設定
+Host *
+  # WSLでの1Password統合のためにWindows SSHを使用
+  # ProxyCommand ssh.exe -W %h:%p %h
+  
+  # 接続を維持
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+  
+  # 接続の再利用
+  ControlMaster auto
+  ControlPath ~/.ssh/sockets/%r@%h-%p
+  ControlPersist 600
+  
+  # セキュリティ
+  StrictHostKeyChecking ask
+  HashKnownHosts yes
+  
+  # 圧縮
+  Compression yes
+
+# 例: 開発サーバー
+# Host dev
+#   HostName dev.example.com
+#   User myuser
+#   Port 22
+#   IdentityFile ~/.ssh/id_ed25519
+
+# 例: GCPインスタンス
+# Host gcp-dev
+#   HostName 10.0.0.1
+#   User poshiri
+#   IdentityFile ~/.ssh/google_compute_engine
+#   ProxyCommand gcloud compute ssh --tunnel-through-iap %h
+
+# 例: GitHub
+Host github.com
+  HostName github.com
+  User git
+  # WSL上の1Password SSHエージェント用
+  # IdentityAgent //./pipe/openssh-ssh-agent

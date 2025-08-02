@@ -1,174 +1,201 @@
-# 環境セットアップ
+# Modern Dotfiles
 
-## 最初にインストール
-```
-sudo apt install git automake make gcc wget
-```
+現在の開発環境設定をベースに、よりモダンなツールへ移行した dotfiles セットアップです。
 
-## zsh
-1. インストール
-```shell
-sudo apt update
-sudo apt install zsh
-```
-1. 設定
-```shell
-chsh -s $(which zsh)
-```
+## 特徴
 
-## prezroインストール
-1. clone
-```shell
-git clone --recursive https://github.com/sorin-ionescu/prezto.git ${ZDOTDIR:-$HOME}/.zprezto
-```
-1. zshのEXTENDED_GLOBオプションを設定
-```shell
-setopt EXTENDED_GLOB
-```
-1. 設定ファイルを作成
-```shell
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
-```
-1. `.zpreztorc` ファイルをコピー
-```shell
-cp .zpreztorc ~/
-```
-1. カスタムした `pure.zsh` をコピー
-```shell
-> cp .pure.zsh ~/.zprezto/modules/prompt/external/pure/
-```
+- 🚀 **モダンなツール**: Prezto → Zinit、Pure → Powerlevel10k への移行
+- 📦 **整理された構造**: 設定ファイルがカテゴリ別に整理
+- 🔧 **自動セットアップ**: ワンコマンドでインストール可能
+- 💾 **バックアップ機能**: 既存の設定を自動バックアップ
+- 🎨 **カスタマイズ可能**: 簡単に設定を追加・変更可能
+- 🪟 **WSL 対応**: Windows Subsystem for Linux 固有の設定を含む
+- 🔐 **1Password 統合**: Git SSH 署名のサポート
 
-## tmux インストール
-1. install
-```shell
-sudo apt install tmux
+## ディレクトリ構造
+
 ```
-1. 設定ファイルのコピー
-```shell
-cp .tmux* ~/
-```
-1. tpm
-```shell
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+dotfiles/
+├── install.sh          # 自動セットアップスクリプト
+├── zsh/               # Zsh関連設定
+│   ├── .zshrc         # メイン設定（Zinit + Powerlevel10k）
+│   ├── .zprofile
+│   ├── .zshenv
+│   ├── aliases.zsh    # カスタムエイリアス
+│   ├── functions.zsh
+│   └── completions.zsh
+├── git/               # Git関連設定
+│   ├── .gitconfig     # 1Password SSH署名対応
+│   └── .gitignore_global
+├── vim/               # Vim関連設定
+│   └── .vimrc
+├── tmux/              # tmux関連設定
+│   ├── .tmux.conf
+│   ├── .tmux.session.conf  # tmuxg用
+│   └── .tmux.gcp.conf      # tmuxr用
+├── config/            # アプリケーション設定
+│   ├── starship.toml
+│   ├── wsl.zsh        # WSL固有設定
+│   ├── gh/            # GitHub CLI設定
+│   │   └── config.yml
+│   ├── claude/        # Claude CLI設定
+│   │   └── settings.json
+│   └── direnv/        # direnv設定
+│       └── direnvrc
+├── ssh/               # SSH設定
+│   └── config.template
+├── scripts/           # ユーティリティスクリプト
+│   └── backup.sh
+├── .editorconfig      # エディタ共通設定
+├── .rgignore          # ripgrep無視設定
+├── .fdignore          # fd無視設定
+└── .curlrc            # cURLデフォルト設定
 ```
 
-1. 反映させる
-```shell
-source ~/.tmux.conf
-source ~/.tmux.session.conf
+## クイックスタート
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/yourusername/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+
+# インストールスクリプトを実行
+./install.sh
 ```
 
-## vim
-1. dein install
-```shell
-mkdir -p ~/.cache/dein
-cd ~/.cache/dein
+## インストール内容
 
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh ~/.cache/dein
-```
+自動インストールスクリプトは以下を実行します：
 
-1. vimrc とかコピー
-```shell
-cp .vimrc ~/
-cp -a .vim/ ~/
-```
+1. **バージョン管理ツールのインストール**
 
-## volta
-1. install
-```shell
-curl https://get.volta.sh | bash # voltaのインストールコマンド (https://docs.volta.sh/guide/getting-started)
-exec $SHELL -l # shellのリロード
-volta -v # バージョンが表示されていればインストール成功
-echo "export VOLTA_FEATURE_PNPM=1" >> ~/.zshrc
-```
+   - Volta (Node.js)
+   - pyenv (Python)
+   - tfenv (Terraform)
+   - phpenv (PHP - オプション)
 
-1. node install
-```shell
-volta install node # LTS が入る
-```
+2. **必須パッケージのインストール**
 
-1. pnpm instal
-```shell
-volta install pnpm
-```
+   - Git, Vim, tmux, Zsh
+   - ripgrep, fd, bat, htop, jq
+   - direnv, ctags, wget
+   - ビルドツール
 
-## pyenv
-1. install
-```shell
-sudo apt update
-sudo apt install build-essential libffi-dev libssl-dev zlib1g-dev liblzma-dev libbz2-dev \
-  libreadline-dev libsqlite3-dev libopencv-dev tk-dev git
+3. **プラグインマネージャーのインストール**
 
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+   - Zinit (Zsh プラグイン管理)
+   - TPM (tmux プラグイン管理)
+
+4. **設定ファイルのシンボリックリンク作成**
+
+5. **デフォルトシェルの変更** (Zsh に設定)
+
+## インストール後の設定
+
+### 1. Git 設定
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
 ```
 
-1. .zprofile に追加
-```vim
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+### 2. Powerlevel10k 設定
+
+```bash
+p10k configure
 ```
 
-## rbenv
-1. install
-```shell
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+### 3. tmux プラグインインストール
+
+tmux を起動して `Ctrl+a` → `I` を押す
+
+## バックアップ
+
+既存の設定をバックアップ：
+
+```bash
+./scripts/backup.sh
 ```
 
-## go
-1. install
-```shell
-sudo tar -C /usr/local -xzf go1.11.5.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.11.5.linux-amd64.tar.gz
-```
-1. path 通す
-```shell
-export PATH=$PATH:/usr/local/go/bin
+バックアップは `~/.dotfiles_backups/` に保存されます。
+
+## カスタマイズ
+
+### ローカル設定
+
+以下のファイルでローカル固有の設定を追加できます：
+
+- `~/.zshrc.local` - Zsh のローカル設定
+
+### エイリアスの追加
+
+`zsh/aliases.zsh` にカスタムエイリアスを追加
+
+### 関数の追加
+
+`zsh/functions.zsh` にカスタム関数を追加
+
+## トラブルシューティング
+
+### フォントが正しく表示されない
+
+Nerd Fonts をインストール：
+
+```bash
+# macOS
+brew tap homebrew/cask-fonts
+brew install --cask font-meslo-lg-nerd-font
+
+# Linux
+# https://www.nerdfonts.com/ からダウンロード
 ```
 
-## the_platinum_searcher
-1. install
-```shell
-go get -u github.com/monochromegane/the_platinum_searcher/...
-```
+### tmux のプレフィックスキー
 
-## docker
-1. package
-```shell
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
-```
-1. gpg キー追加
-```shell
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-```
-1. 鍵確認
-```shell
-sudo apt-key fingerprint 0EBFCD88
-```
-1. リポジトリ追加
-```shell
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
-   $(lsb_release -cs) \
-   stable"
-```
-1. install
-```shell
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-```
+デフォルトは `Ctrl+a` に設定されています。
+`Ctrl+b` に戻す場合は `tmux/.tmux.conf` を編集してください。
 
-## postgresql
-1. install
-```shell
-sudo apt-get install postgresql-client
-```
+## 含まれるツールと設定
+
+### シェル環境
+
+- **Zsh**: Zinit + Powerlevel10k（Prezto から移行）
+- **履歴管理**: 拡張履歴設定（100,000 件保存）
+- **補完**: 高度な補完設定
+
+### 開発ツール
+
+- **Node.js**: Volta（高速なバージョン管理）
+- **Python**: pyenv
+- **PHP**: phpenv（オプション）
+- **Terraform**: tfenv
+- **direnv**: プロジェクト別環境変数
+
+### エディタ・ターミナル
+
+- **Git**: 1Password SSH 署名対応、GitHub CLI 統合
+- **Vim**: 基本設定 + ファイルタイプ別設定
+- **tmux**: カスタムセッション設定（tmuxg, tmuxr）
+
+### カスタムエイリアス
+
+- `llt`: タイムスタンプ付き ls
+- `gcl`: 開発ブランチ以外を一括削除
+- `claude`, `task`: カスタムツール
+- GCP 関連: `poshiri-start`, `poshiri-stop`
+- Gemini 検索: `gemini-search`, `gs-tech`, `gs-error`
+
+### WSL 固有機能
+
+- Windows SSH 統合（1Password）
+- X11 フォワーディング設定
+- Windows/WSL 間のクリップボード連携
+
+### 開発サポートツール
+
+- **Claude CLI**: AI 開発アシスタント設定
+- **direnv**: プロジェクト別環境変数管理
+- **EditorConfig**: エディタ設定の統一
+- **ripgrep/fd**: 高速検索ツール用 ignore 設定
+- **cURL**: HTTP クライアントのデフォルト設定
+- **SSH**: テンプレート設定（1Password 対応）

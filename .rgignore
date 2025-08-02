@@ -1,0 +1,53 @@
+# ripgrep無視設定ファイル
+
+# バージョン管理
+.git/
+
+# 依存関係
+node_modules/
+vendor/
+.venv/
+venv/
+__pycache__/
+
+# ビルド出力
+dist/
+build/
+target/
+out/
+*.pyc
+*.pyo
+*.class
+*.o
+*.so
+*.dll
+*.exe
+
+# IDE関連
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS関連
+.DS_Store
+Thumbs.db
+
+# アーカイブ
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# 大きいファイル
+*.log
+*.sql
+*.sqlite
+*.db
+
+# 一時ファイル
+tmp/
+temp/
+.cache/
+coverage/
